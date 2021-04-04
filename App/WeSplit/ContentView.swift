@@ -1,40 +1,29 @@
 import SwiftUI
 
-enum Meal: String, Identifiable, CaseIterable {
-    case breakfast
-    case lunch
-    case snack
-    case dinner
-    
-    var capitalized: String { return rawValue.capitalized }
-    var id: String { return rawValue }
-}
-
 struct ContentView: View {
-    @State var meals: [Meal]
+    
+    @State private var checkAmount = ""
+    @State private var numberOfPeople = 2
+    @State private var tipPercentage = 2
+    
+    let tipPercentages = [10, 15, 20, 25, 0]
     
     var body: some View {
-        NavigationView {
-            Form {
-                ForEach(meals) {
-                    MealView(meal: $0)
-                }
+        Form {
+            Section {
+                TextField("Amount", text: $checkAmount)
+                    .keyboardType(.decimalPad)
             }
-            .navigationBarTitle(Text("Meals"), displayMode: .large)
+            
+            Section {
+                Text("$ \(checkAmount)")
+            }
         }
-    }
-}
-
-struct MealView: View {
-    var meal: Meal
-    
-    var body: some View {
-        Text(meal.capitalized)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(meals: Meal.allCases)
+        ContentView()
     }
 }
