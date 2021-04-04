@@ -9,15 +9,27 @@ struct ContentView: View {
     let tipPercentages = [10, 15, 20, 25, 0]
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Amount", text: $checkAmount)
-                    .keyboardType(.decimalPad)
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Amount", text: $checkAmount)
+                        .keyboardType(.decimalPad)
+                    
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2 ..< 100) {
+                            Text("\($0) people")
+                        }
+                    }
+                }
+                
+                Section {
+                    Text("$ \(checkAmount)")
+                }
             }
-            
-            Section {
-                Text("$ \(checkAmount)")
-            }
+            .navigationBarTitle("WeSplit")
+            /**
+              "NavigationViews are capable of showing many views as the program runs; attaching the title to the 'view' inside the navigation view lets iOS to change titles freely." - https://www.hackingwithswift.com/books/ios-swiftui/creating-pickers-in-a-form
+             **/
         }
     }
 }
