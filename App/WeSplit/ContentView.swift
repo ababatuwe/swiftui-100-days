@@ -3,10 +3,21 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var checkAmount = ""
-    @State private var numberOfPeople = 2
-    @State private var tipPercentage = 2
+    @State private var selectedNumberOfPeople = 2
+    @State private var selectedTipPercentage = 2
     
     let tipPercentages = [10, 15, 20, 25, 0]
+    
+    /// Calculates the total per person
+    var totalPerPerson: Double {
+        let peopleCount = Double(selectedNumberOfPeople + 2)
+        let tipSelection = Double(tipPercentages[selectedTipPercentage])
+        let orderAmount = Double(checkAmount) ?? 0
+        
+        let tipValue = orderAmount / 100 * tipSelection
+        let grandTotal = orderAmount + tipValue
+        return grandTotal / peopleCount
+    }
     
     var body: some View {
         NavigationView {
@@ -15,14 +26,14 @@ struct ContentView: View {
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
                     
-                    Picker("Number of people", selection: $numberOfPeople) {
-                        ForEach(2 ..< 100) {
+                    Picker("Number of people", selection: $selectedNumberOfPeople) {
+                        ForEach(2 ..< 12) {
                             Text("\($0) people")
                         }
                     }
                 }
                 Section(header: Text("How much tip do you want to leave?")) {
-                    Picker("Tip percentage", selection: $tipPercentage) {
+                    Picker("Tip percentage", selection: $selectedTipPercentage) {
                         ForEach(0 ..< tipPercentages.count) {
                             Text("\(self.tipPercentages[$0])%")
                         }
@@ -34,7 +45,7 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text("$ \(checkAmount)")
+                    Text("$ \(totalPerPerson, specifier: "%.2f")")
                 }
             }
             .navigationBarTitle("WeSplit")
