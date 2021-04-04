@@ -1,10 +1,3 @@
-//
-//  WeSplitUITests.swift
-//  WeSplitUITests
-//
-//  Created by Gabs on 2021-04-03.
-//
-
 import XCTest
 
 class WeSplitUITests: XCTestCase {

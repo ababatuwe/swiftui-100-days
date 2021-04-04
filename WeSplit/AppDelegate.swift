@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  WeSplit
-//
-//  Created by Gabs on 2021-04-03.
-//
-
 import UIKit
 
 @main

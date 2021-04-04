@@ -1,10 +1,3 @@
-//
-//  WeSplitTests.swift
-//  WeSplitTests
-//
-//  Created by Gabs on 2021-04-03.
-//
-
 import XCTest
 @testable import WeSplit
 
