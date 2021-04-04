@@ -1,11 +1,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tapCount = 0
+    @State var name = ""
     
     var body: some View {
-        Button("Tap Count \(tapCount)") {
-            self.tapCount += 1
+        Form {
+            TextField("Enter your name", text: $name)
+            if !name.isEmpty {
+                Text("Hello \(name)")
+            }
+            
         }
     }
 }
