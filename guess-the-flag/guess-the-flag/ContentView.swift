@@ -1,68 +1,79 @@
-//
-//  ContentView.swift
-//  guess-the-flag
-//
-//  Created by Gabs on 2021-04-08.
-//
-
 import SwiftUI
 
+struct GuessTheFlag {
+    private(set) var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"]
+    private(set) var score: Int = 0
+    private(set) var correctAnswer = Int.random(in: 0...2)
+    
+    var answer: String {
+        country(at: correctAnswer)
+    }
+    
+    mutating func askQuestion() {
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
+    }
+    
+    func country(at index: Int) -> String {
+        guard index >= 0, index < countries.count else { return "" }
+        return countries[index]
+    }
+    
+    mutating func calculateAnswer(for selectedCountry: Int) -> String {
+        if country(at: selectedCountry) == answer {
+            self.score = score + 5
+            return "Correct"
+        } else {
+            return "Wrong! That's the flag of \(self.countries[selectedCountry])"
+        }
+    }
+    
+}
+
 struct ContentView: View {
-    @State var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"]
-    @State var correctAnswer = Int.random(in: 0...2)
-    @State private var showingScore = false
+    @State var game = GuessTheFlag()
     @State private var scoreTitle = ""
-    @State private var score: Int = 0
+    @State private var showingScore = false
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.blue, .yellow]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 30) {
                 VStack {
                     Text("Tap the flag of")
-                    Text(countries[correctAnswer])
+                    Text(game.answer)
                         .font(.largeTitle)
                         .fontWeight(.black)
                 }
                 ForEach(0 ..< 3) { number in
                     Button(action: {
-                        // Flag was tapped
                         self.flagTapped(number)
                     }, label: {
-                        Image(self.countries[number])
+                        Image(game.country(at: number))
                             .renderingMode(.original)
                             .clipShape(Capsule())
                             .overlay(Capsule().stroke(Color.black, lineWidth: 1))
                             .shadow(color: .black, radius: 2)
                     })
                 }
-                Text("Score: \(score)")
+                Text("Score: \(game.score)")
                     .font(.body)
                     .fontWeight(.medium)
-                    .background(Color.blue)
                 Spacer()
             }
         }.alert(isPresented: $showingScore, content: {
-            Alert(title: Text(scoreTitle), message: Text("Your score is \(score)"), dismissButton: .default(Text("Continue")) {
-                self.askQuestion()
+            Alert(title: Text(scoreTitle),
+                  message: Text("Your score is \(game.score)"),
+                  dismissButton: .default(Text("Continue")) {
+                self.game.askQuestion()
             })
         })
     }
     
     func flagTapped(_ number: Int) {
-        if number == correctAnswer {
-            scoreTitle = "Correct"
-            score = score + 5
-        } else {
-            scoreTitle = "Wrong! That's the flag of \(self.countries[number])"
-        }
+        scoreTitle = game.calculateAnswer(for: number)
         showingScore = true
-    }
-    
-    func askQuestion() {
-        countries.shuffle()
-        correctAnswer = Int.random(in: 0...2)
     }
 }
 
