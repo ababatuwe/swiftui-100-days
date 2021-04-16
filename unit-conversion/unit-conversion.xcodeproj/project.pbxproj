@@ -15,6 +15,7 @@
 		0B0EDF8C261D3F6700B78ADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B0EDF8A261D3F6700B78ADF /* LaunchScreen.storyboard */; };
 		0B0EDF97261D3F6800B78ADF /* unit_conversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0EDF96261D3F6800B78ADF /* unit_conversionTests.swift */; };
 		0B0EDFA2261D3F6800B78ADF /* unit_conversionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0EDFA1261D3F6800B78ADF /* unit_conversionUITests.swift */; };
+		0BCCB39F2622B59400271E7E /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCCB39E2622B59400271E7E /* UnitConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		0B0EDF9D261D3F6800B78ADF /* unit-conversionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unit-conversionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B0EDFA1261D3F6800B78ADF /* unit_conversionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unit_conversionUITests.swift; sourceTree = "<group>"; };
 		0B0EDFA3261D3F6800B78ADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BCCB39E2622B59400271E7E /* UnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				0B0EDF8A261D3F6700B78ADF /* LaunchScreen.storyboard */,
 				0B0EDF8D261D3F6700B78ADF /* Info.plist */,
 				0B0EDF87261D3F6700B78ADF /* Preview Content */,
+				0BCCB39E2622B59400271E7E /* UnitConverter.swift */,
 			);
 			path = "unit-conversion";
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			files = (
 				0B0EDF80261D3F6700B78ADF /* AppDelegate.swift in Sources */,
 				0B0EDF82261D3F6700B78ADF /* SceneDelegate.swift in Sources */,
+				0BCCB39F2622B59400271E7E /* UnitConverter.swift in Sources */,
 				0B0EDF84261D3F6700B78ADF /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
