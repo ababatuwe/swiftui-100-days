@@ -1,7 +1,6 @@
-//
-
 import SwiftUI
 
+/// Represents User and Computer Moves & Display Text
 enum Choice: Int, CaseIterable {
     case rock = 0
     case paper
@@ -12,6 +11,9 @@ enum Choice: Int, CaseIterable {
         return moves[rawValue]
     }
 }
+
+// MARK: - Game Rules
+// Calculate who wins
 extension Choice: Comparable {
     static func < (lhs: Choice, rhs: Choice) -> Bool {
         switch lhs {
@@ -48,6 +50,7 @@ extension Choice: Comparable {
     
 }
 
+// MARK: - Game
 struct RockPaperScissors {
     let moves = Choice.allCases
     private var computerChoice = Int.random(in: 0...2)
@@ -80,6 +83,7 @@ struct RockPaperScissors {
     }
 }
 
+// MARK: - UI
 struct ContentView: View {
     @State private var game = RockPaperScissors()
     
